@@ -32,9 +32,7 @@ public class Example1 {
 
 		// Write a line of code that assigns the number of milk bottles to the testValue
 		// using the setter instance method.
-		int noOfMilkBottles;
-		public void setNoOfBottles(){
-			noOfMilkBottles = testValue; 
-		}
+		testValue = myHouse.getNumberBottles();
+		
 	}
 }

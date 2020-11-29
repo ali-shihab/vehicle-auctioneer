@@ -11,7 +11,7 @@ public class Example3 {
 	public static void main(String[] args) {
 
 		// Create an array of strings. Arrays always have a fixed size.
-		String[] names = new String[20];
+		String[] names = new String[21];
 
 		// Assign values to the first two elements of the array.
 		names[0] = "Helen";
@@ -23,6 +23,8 @@ public class Example3 {
 				System.out.println("Name is: " + name);
 			}
 		}
+		
+		names[20] = "Bobby";
 
 	}
 }
