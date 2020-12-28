@@ -38,11 +38,11 @@ public class GasBill {
 		
 		return "Gas Bill\n" + " Account Number:" + this.accountNumber + "\n" 
 	+ " Customer:" + getCustomer() + "\n"
-	+ " Amount due:" + this.amount + "0";
+	+ " Amount due:" + displayAmountDue();
 	}
 	
 	private String displayAmountDue() {
-		return String.valueOf(this.amount);
+		return String.valueOf(String.format("%.2f", this.amount));
 	}
 }
 
