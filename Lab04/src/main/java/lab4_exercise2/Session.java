@@ -20,15 +20,15 @@ public class Session {
 		}
 		
 		public int getStartTime() {
-			return startTime;
+			return this.startTime;
 		}
 		
 		public int getEndTime() {
-			return endTime;
+			return this.endTime;
 		}
 		
 		public String getSessionName()
 		{
-			return sessionName;
+			return this.sessionName;
 		}
 }

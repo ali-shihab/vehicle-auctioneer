@@ -16,7 +16,7 @@ public class Position {
 	}
 	
 	public String getRoleName() {
-		return role;
+		return this.role;
 	}
 	
 	public void setRoleName(String newRoleName) {

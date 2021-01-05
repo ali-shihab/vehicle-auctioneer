@@ -20,6 +20,9 @@ public class Shop {
   }
   
   public void addItem(IItem item) {
+	  if (item == null) {
+		  throw new NullPointerException();
+	  }
 	  this.items.add(item);
   }
   

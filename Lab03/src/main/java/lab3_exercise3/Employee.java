@@ -24,19 +24,19 @@ public class Employee {
 	}
 	
 	public String getForename() {
-		return forename;
+		return this.forename;
 	}
 	
 	public String getSurname() {
-		return surname;
+		return this.surname;
 	}
 	
 	public double getSalary() {
-		return salary.getSalary();
+		return this.salary.getSalary();
 	}
 	
 	public String getPositionName() {
-		return companyPosition.getRoleName();
+		return this.companyPosition.getRoleName();
 	}
 	
 	public String displayEmployeeName() {
@@ -44,7 +44,7 @@ public class Employee {
 	}
 	
 	public int getId() {
-		return id;
+		return this.id;
 	}
 	
 	private String eligibleForBonus(AnnualSalary salary) {

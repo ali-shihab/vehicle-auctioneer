@@ -23,7 +23,7 @@ public class AnnualSalary {
 	}
 	
 	public double getSalary() {
-		return salary;
+		return this.salary;
 	}
 	
 	public double calculateTax() {

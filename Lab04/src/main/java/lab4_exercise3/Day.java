@@ -20,14 +20,14 @@ public class Day {
 		}
 		
 		public void setSession(int index, String moduleName, int startTime, int endTime) {
-			sessions[index] = new Session(moduleName, startTime, endTime);
+			this.sessions[index] = new Session(moduleName, startTime, endTime);
 		}
 		
 		@Override
 		public String toString() {
 			String sessionDisplay = "";
 			String totalDisplay = "";
-			for (Session session : sessions) {
+			for (Session session : this.sessions) {
 				if (session != null) {
 					sessionDisplay = session.getSessionName() + ": " + session.getStartTime() + " - " + session.getEndTime() + "\n";
 					totalDisplay += sessionDisplay;
@@ -38,10 +38,10 @@ public class Day {
 		}
 
 		public void display() {
-			System.out.println(name +"\n" + toString());
+			System.out.println(this.name +"\n" + toString());
 		}
 		
 		public String getName() {
-			return name;
+			return this.name;
 		}
 }

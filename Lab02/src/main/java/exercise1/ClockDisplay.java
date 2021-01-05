@@ -3,6 +3,7 @@ package exercise1;
 import java.text.DecimalFormat;
 
 public class ClockDisplay {
+	
 	private NumberInfo hours;
 	private NumberInfo minutes;
 	private int count = 0;

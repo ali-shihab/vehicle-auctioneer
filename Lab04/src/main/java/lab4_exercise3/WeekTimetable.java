@@ -15,12 +15,12 @@ public class WeekTimetable {
 	}
 	
 	public void addDailySessions(int index, Day day) {
-		days[index] = day;
+		this.days[index] = day;
 	}
 	
 	public String printTimetable() {
 		String timeTable ="";
-		for (Day day : days) {
+		for (Day day : this.days) {
 			timeTable += (day.getName() + "\n" + day.toString() + "\n");
 		}
 		
