@@ -11,10 +11,10 @@ package coursework_question1;
 public class Offer {
 
   /** The value of the offer made by the buyer. */
-  private double value;
+  private double value = 0;
   
   /** The buyer in question */
-  private User buyer;
+  private User buyer = null;
 		
   /** Constructor. Sets the field values. 
    * 

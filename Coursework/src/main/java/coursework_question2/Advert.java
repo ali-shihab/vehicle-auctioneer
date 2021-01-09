@@ -17,10 +17,10 @@ import java.util.Map;
 public class Advert {
 
   /** The car to be advertised. */	
-  private Car car;
+  private Car car = null;
   
   /** The list of offers made for the car. */
-  private List<Offer> offers;
+  private List<Offer> offers = null;
 		
   /** Constructor. Sets the value of the Car field.
    * 
@@ -90,18 +90,18 @@ public class Advert {
 	
 	if (buyer == null) {
 	    throw new IllegalArgumentException("Buyer must exist.");
-	} else if (value <= 0) {
+	} else if (value < 0) {
 	    throw new IllegalArgumentException("Offer cannot be less than 0.");
+	} else if (!this.offers.isEmpty()) { 
+		if (value <= getHighestOffer().getValue()) {
+		return placed;
+		}
 	}
 	
 	for (Offer offer : this.offers) {
 	  if (offer.getBuyer() == buyer) {
-	    if (offer.getValue() == value) {
-		    throw new IllegalArgumentException("Offer already placed by this buyer.");
-		} else {
-		    offer.setValue(value);
-		    placed = true;
-		}
+		  offer.setValue(value);
+		  placed = true;
 	  }
 	}
 	this.offers.add(new Offer(buyer, value));

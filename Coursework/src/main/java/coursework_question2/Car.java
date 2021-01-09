@@ -35,10 +35,10 @@ public class Car {
   
   /** The car's physical condition. */
   private Condition condition = null;
-  
-  /** The type of sale the car is enlisted for. */
-  private SaleType type;
 		
+  /** Whether the car is up for direct purchase or auction. */
+  private SaleType type = null;
+  
   /**
    * Constructor. Sets the value of the fields.
    * 
@@ -58,11 +58,25 @@ public class Car {
    * 		  Car's body type.
    * @param numberOfSeats
    * 		  Number of seats that the car has.
+   * @param type
+   * 		  Sale type of the car (direct purchase/auction).
    * 
    * @throws IllegalArgumentException
    * 		  If any of the parameters passed are null, out of range, or not in the correct format.
    */
-    public Car(int id, String name, double reservedPrice, Condition condition, SaleType type) throws IllegalArgumentException {
+    public Car(int id, String name, double reservedPrice, Condition condition, SaleType type) throws IllegalArgumentException {		
+	  
+    	if (!String.valueOf(id).matches("[0-9]{4}")) {
+	    throw new IllegalArgumentException("Invalid ID number.");
+   	  } else if (name == null || !name.matches("[A-Z]{1}[a-z]* [A-Z]*[a-z0-9\\s]*")) {
+	    throw new IllegalArgumentException("Invalid car name.");
+	  } else if (reservedPrice < 0) {
+		throw new IllegalArgumentException("Reserved price cannot be negative.");
+	  } else if (condition == null) {
+		throw new IllegalArgumentException("Condition cannot be null.");
+	  } else if (type == null) {
+		throw new IllegalArgumentException("Sale type cannot be null.");
+	  }
 	  this.id = id;
    	  this.name = name;
    	  this.reservedPrice = reservedPrice;
@@ -72,22 +86,6 @@ public class Car {
    	  this.body = null;
    	  this.numberOfSeats = 0;
    	  this.type = type;
-			
-	  if (!String.valueOf(id).matches("[0-9]{4}")) {
-	    throw new IllegalArgumentException("Invalid ID number.");
-   	  }
-			
-	  if (name == null || !name.matches("[A-Z]{1}[a-z]* [A-Z]*[a-z]*[0-9]*")) {
-	    throw new IllegalArgumentException("Invalid car name.");
-	  }
-			
-	  if (reservedPrice < 0) {
-		throw new IllegalArgumentException("Reserved price cannot be negative.");
-	  }
-			
-	  if (condition == null) {
-		throw new IllegalArgumentException("Condition cannot be null.");
-	  }
 	}
 		
     /** 
@@ -165,6 +163,10 @@ public class Car {
 		
 	public double getPrice() {
 	  return this.reservedPrice;
+	}
+	
+	public SaleType getType() {
+	  return this.type;
 	}
 
     /** 

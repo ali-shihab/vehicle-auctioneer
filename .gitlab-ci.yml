@@ -1,1 +1,1 @@
-include: '/Lab10/.project_cicd_config.yml'
+include: '/Coursework/.project_cicd_config.yml'

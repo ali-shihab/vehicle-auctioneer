@@ -15,16 +15,16 @@ import java.util.Map;
 public class Auctioneer {
 
   /** The name of the auctioneer. */
-  private String name;
+  private String name = null;
   
-  /** The mapping of cars currently for sale to the sellers of said cars. */
-  protected Map<Advert, User> carsForSale;
+  /** The map of cars currently for sale and the sellers of said cars. */
+  protected Map<Advert, User> carsForSale = null;
   
-  /** The mapping of cars that were sold to the sellers of said cars */
-  protected Map<Advert, User> soldCars;
+  /** The map of cars, that were sold, and the sellers of said cars. */
+  protected Map<Advert, User> soldCars = null;
   
-  /** The mapping of unsuccessful car listings to the sellers of said cars. */
-  protected Map<Advert, User> unsoldCars;
+  /** The map of unsuccessful car listings and the sellers of said cars. */
+  protected Map<Advert, User> unsoldCars = null;
   
   /** 
    * Constructor. Sets the maps for the respective advert categories and
@@ -34,7 +34,9 @@ public class Auctioneer {
    * 		  Name of the auctioneer.
    * 
    * @throws IllegalArgumentException
-   * 		  If the name is null or isn't in the correct format.
+   * 		  If the name is null. Name isn't validated against a regex
+   * 		  because the unit test allows for "Stella" and "Adam Hills"
+   * 		  to both be created.
    */
   public Auctioneer(String name) {
 	if (name == null) {
@@ -47,7 +49,8 @@ public class Auctioneer {
   }
 		
   /**
-   * Method. Checks if the specified car is currently for sale.
+   * Method. Checks and indicates if the specified car is 
+   * currently for sale.
    * 
    * @param car
    * 		  The car to check for the presence of in the 

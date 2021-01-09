@@ -4,16 +4,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AdvertTest {
-  Car car1 = new Car(1234, "Ferrari F12", 200000.00, Condition.NEW);
-  /** car1.setColour("Red");
-  car1.setGearbox(CarType.SUPERCAR);
-  car1.setBody(CarBody.MANNUAL);
-  car1.setNumberOfSeats(4); */
-  Advert ad = new Advert(car1);
+  Car car = new Car(1234, "Ferrari F12", 200000.00, Condition.NEW);
+  Advert ad = new Advert(car);
   
   @Test
   public void coursework_testGetCar() {
-	  assertEquals(car1, ad.getCar());
+	  assertEquals(car, ad.getCar());
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -54,6 +50,10 @@ public class AdvertTest {
   
   @Test
   public void coursework_testToString() {
-	  assertEquals("Ad:  1234 - Ferrari F12 (£200000.00)\n\t Type:  MANUAL\n\t Style:  SUPERCAR\n\t Colour:  Red\n\t No.  of Seats:  4\n\t Condition:  NEW", ad.toString());
+	  car.setColour("Red");
+	  car.setGearbox(CarType.MANUAL);
+	  car.setBody(CarBody.SUPERCAR);
+	  car.setNumberOfSeats(4);
+	  assertEquals("Ad: 1234 - Ferrari F12 (£200000.00)\n\t Type: MANUAL\n\t Style: SUPERCAR\n\t Colour: Red\n\t No. of Seats: 4\n\t Condition: NEW", ad.toString());
   }
 }

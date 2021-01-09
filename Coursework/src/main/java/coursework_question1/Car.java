@@ -59,21 +59,12 @@ public class Car {
    * @throws IllegalArgumentException
    * 		  If any of the parameters passed are null, out of range, or not in the correct format.
    */
-    public Car(int id, String name, double reservedPrice, Condition condition) throws IllegalArgumentException {
-	  this.id = id;
-   	  this.name = name;
-   	  this.reservedPrice = reservedPrice;
-   	  this.condition = condition;
-   	  this.colour = null;
-   	  this.gearbox = null;
-   	  this.body = null;
-   	  this.numberOfSeats = 0;
-			
+    public Car(int id, String name, double reservedPrice, Condition condition) throws IllegalArgumentException {		
 	  if (!String.valueOf(id).matches("[0-9]{4}")) {
 	    throw new IllegalArgumentException("Invalid ID number.");
    	  }
 			
-	  if (name == null || !name.matches("[A-Z]{1}[a-z]* [A-Z]*[a-z]*[0-9]*")) {
+	  if (name == null || !name.matches("[A-Z]{1}[a-z]* [A-Z]*[a-z0-9\\s]*")) {
 	    throw new IllegalArgumentException("Invalid car name.");
 	  }
 			
@@ -84,6 +75,14 @@ public class Car {
 	  if (condition == null) {
 		throw new IllegalArgumentException("Condition cannot be null.");
 	  }
+	  this.id = id;
+   	  this.name = name;
+   	  this.reservedPrice = reservedPrice;
+   	  this.condition = condition;
+   	  this.colour = null;
+   	  this.gearbox = null;
+   	  this.body = null;
+   	  this.numberOfSeats = 0;
 	}
 		
     /** 

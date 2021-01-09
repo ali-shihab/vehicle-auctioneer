@@ -15,16 +15,16 @@ import java.util.Map;
 public class Auctioneer {
 
   /** The name of the auctioneer. */
-  private String name;
+  private String name = null;
   
-  /** The mapping of cars currently for sale to the sellers of said cars. */
-  protected Map<Advert, User> carsForSale;
+  /** The map of cars currently for sale and the sellers of said cars. */
+  protected Map<Advert, User> carsForSale = null;
   
-  /** The mapping of cars that were sold to the sellers of said cars */
-  protected Map<Advert, User> soldCars;
+  /** The map of cars, that were sold, and the sellers of said cars. */
+  protected Map<Advert, User> soldCars = null;
   
-  /** The mapping of unsuccessful car listings to the sellers of said cars. */
-  protected Map<Advert, User> unsoldCars;
+  /** The map of unsuccessful car listings and the sellers of said cars. */
+  protected Map<Advert, User> unsoldCars = null;
   
   /** 
    * Constructor. Sets the maps for the respective advert categories and
@@ -34,7 +34,9 @@ public class Auctioneer {
    * 		  Name of the auctioneer.
    * 
    * @throws IllegalArgumentException
-   * 		  If the name is null or isn't in the correct format.
+   * 		  If the name is null. Name isn't validated against a regex
+   * 		  because the unit test allows for "Stella" and "Adam Hills"
+   * 		  to both be created.
    */
   public Auctioneer(String name) {
 	if (name == null) {
@@ -47,11 +49,12 @@ public class Auctioneer {
   }
 		
   /**
-   * Method. Checks if the specified car is currently for sale.
+   * Method. Checks and indicates if the specified car is
+   * currently for sale.
    * 
    * @param car
    * 		  The car to check for the presence of in the 
-   * 		  'for sale' map of adverts.
+   * 		  carForSale map of adverts.
    * 
    * @return
    * 		  True if it is for sale, false if not.
@@ -108,8 +111,8 @@ public class Auctioneer {
   }
   
   /**
-   * Method. Called to end a listing. Checks if the car is being
-   * sold. If it is, checks if the highest offer for the car is
+   * Method. Called to end a listing. Checks if the car is up for 
+   * auction. If it is, checks if the highest offer for the car is
    * above or below the reserved price of the car. If higher, it
    * moves the car to the sold cars map. If lower, the listing 
    * was unsccessful, so it is moved to the unsold cars map.
@@ -124,6 +127,8 @@ public class Auctioneer {
   public void endSale(Advert advert) {
 	if (advert == null) {
 	    throw new IllegalArgumentException("Advert cannot be null.");
+	} else if (advert.getCar().getType() != SaleType.AUCTION) {
+    	throw new IllegalArgumentException("Car is registered for sale, not auction.");
 	} else if (checkExistence(advert.getCar())) 
 		if (advert.getHighestOffer().getValue() >= advert.getCar().getPrice()) {
 		  this.soldCars.put(advert, this.carsForSale.get(advert));
@@ -154,23 +159,28 @@ public class Auctioneer {
    * 
    * @throws IllegalArgumentException
    * 		  If null is passed for carAdvert or user, or if
-   * 		  a negative number is passed for value.
+   * 		  a negative number is passed for value, or car SaleType
+   * 		  is FORSALe.
    */
   public boolean placeOffer(Advert carAdvert, User user, double value) {
 
 	if (this.carsForSale.containsKey(carAdvert)) {
 	    return carAdvert.placeOffer(user, value);
+	} else if (carAdvert == null || user == null) {
+		throw new IllegalArgumentException("Cannot enter null values.");
+	} else if (carAdvert.getCar().getType() != SaleType.AUCTION) {
+    	throw new IllegalArgumentException("Car is registered for sale, not auction.");
 	} else {
 		throw new IllegalArgumentException("Advert does not exist.");
     }
   }
 
   /**
-   * Method. Registers to the carsForSale maps a car if it hasn't 
-   * been registered before. Due to the specification of this 
-   * coursework, if an unsold car needs to be relisted, or a 
-   * bought car would like to be resold, a new advert needs to be 
-   * made for it before it can be registered.
+   * Method. Registers a car to the carsForSale map if it hasn't 
+   * been registered before and is available for auction, not sale. 
+   * Due to the specification of this coursework, if an unsold car 
+   * needs to be re-listed, or a bought car would like to be resold, 
+   * a new advert needs to be made for it before it can be registered.
    * 
    * @param carAdvert
    * 		  The advert to register.
@@ -194,6 +204,8 @@ public class Auctioneer {
 			
     if (carAdvert == null || user == null || colour == null || type == null || body == null || noOfSeats == 0) {
         throw new IllegalArgumentException("Cannot pass a null value");
+    } else if (carAdvert.getCar().getType() != SaleType.AUCTION) {
+    	throw new IllegalArgumentException("Car is registered for sale, not auction.");
     } else if (checkExistence(carAdvert.getCar())) {
     	throw new IllegalArgumentException("An advert already exists for this car.");
     } else if (soldCars.containsKey(carAdvert)) {
